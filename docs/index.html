@@ -51,15 +51,29 @@ for existence of.</p>
             
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">var</span> exists = <span class="hljs-built_in">module</span>.exports.exists = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">exists</span><span class="hljs-params">(object, path)</span> </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
-    path = path.split(<span class="hljs-string">"."</span>);
-  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">arguments</span>.length === <span class="hljs-number">2</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
+      path = path.split(<span class="hljs-string">"."</span>);
+    }
 
-  <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-  }
+    <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    path = path.slice();
 
-  path = path.slice();
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">var</span> acc = [];
+    <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
+      <span class="hljs-keyword">if</span> (item <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) {
+        acc = [].concat(acc, item);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> item === <span class="hljs-string">"string"</span> &amp;&amp; item.indexOf(<span class="hljs-string">"."</span>) !== -<span class="hljs-number">1</span>) {
+        acc = [].concat(acc, item.split(<span class="hljs-string">"."</span>));
+      } <span class="hljs-keyword">else</span> {
+        acc.push(item);
+      }
+    });
+    path = acc;
+  }
 
   <span class="hljs-keyword">var</span> key = path.shift();
 
@@ -105,7 +119,17 @@ instead.</p>
     path = path.slice();
 
   } <span class="hljs-keyword">else</span> {
-    path = <span class="hljs-built_in">Array</span>.prototype.slice(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>);
+    <span class="hljs-keyword">var</span> acc = [];
+    <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
+      <span class="hljs-keyword">if</span> (item <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) {
+        acc = [].concat(acc, item);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> item === <span class="hljs-string">"string"</span> &amp;&amp; item.indexOf(<span class="hljs-string">"."</span>) !== -<span class="hljs-number">1</span>) {
+        acc = [].concat(acc, item.split(<span class="hljs-string">"."</span>));
+      } <span class="hljs-keyword">else</span> {
+        acc.push(item);
+      }
+    });
+    path = acc;
   }
 
   <span class="hljs-keyword">var</span> key = path.shift();
@@ -142,16 +166,29 @@ specified criterion. If none match, an empty array will be returned.</p>
             
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">var</span> search = <span class="hljs-built_in">module</span>.exports.search = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">search</span><span class="hljs-params">(object, path)</span> </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
-    path = path.split(<span class="hljs-string">"."</span>);
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">arguments</span>.length === <span class="hljs-number">2</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
+      path = path.split(<span class="hljs-string">"."</span>);
+    }
+
+    <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    path = path.slice();
+
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">var</span> acc = [];
+    <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
+      <span class="hljs-keyword">if</span> (item <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) {
+        acc = [].concat(acc, item);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> item === <span class="hljs-string">"string"</span> &amp;&amp; item.indexOf(<span class="hljs-string">"."</span>) !== -<span class="hljs-number">1</span>) {
+        acc = [].concat(acc, item.split(<span class="hljs-string">"."</span>));
+      } <span class="hljs-keyword">else</span> {
+        acc.push(item);
+      }
+    });
+    path = acc;
   }
-
-  <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
-    <span class="hljs-keyword">return</span>;
-  }
-
-  path = path.slice();
-
   <span class="hljs-keyword">var</span> key = path.shift();
 
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> object !== <span class="hljs-string">"object"</span> || object === <span class="hljs-literal">null</span>) {
@@ -189,20 +226,54 @@ they do. If a value is encountered in the middle of the path that is <em>not</em
 an object, it will not be overwritten.</p>
 <p>The return value is <code>true</code> in the case that the value was <code>put</code>
 successfully, or <code>false</code> otherwise.</p>
+<p>** PUT has a new caveat added with the new bindable currying code.
+The last value of arguments is always considered the value.
+In other functions if this value is an array it is merged with the current 
+path, however here we cannot make that assumption</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>
 <span class="hljs-keyword">var</span> put = <span class="hljs-built_in">module</span>.exports.put = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">put</span><span class="hljs-params">(object, path, value)</span> </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
-    path = path.split(<span class="hljs-string">"."</span>);
-  }
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">arguments</span>.length === <span class="hljs-number">2</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
+      path = path.split(<span class="hljs-string">"."</span>);
+    }
 
-  <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    path = path.slice();
+
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">var</span> acc = [];</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Requires a slightly more complex version because of the value arg</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> path = <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>);
+    value = path.pop();
+    path.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
+      <span class="hljs-keyword">if</span> (item <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) {
+        acc = [].concat(acc, item);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> item === <span class="hljs-string">"string"</span> &amp;&amp; item.indexOf(<span class="hljs-string">"."</span>) !== -<span class="hljs-number">1</span>) {
+        acc = [].concat(acc, item.split(<span class="hljs-string">"."</span>));
+      } <span class="hljs-keyword">else</span> {
+        acc.push(item);
+      }
+    });
+    path = acc;
   }
-  
-  path = path.slice();
 
   <span class="hljs-keyword">var</span> key = path.shift();
 
@@ -228,11 +299,11 @@ successfully, or <code>false</code> otherwise.</p>
         </li>
         
         
-        <li id="section-6">
+        <li id="section-7">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-6">&#182;</a>
+                <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
               <p><code>remove</code> is like <code>put</code> in reverse!</p>
 <p>The return value is <code>true</code> in the case that the value existed and was removed
@@ -241,16 +312,30 @@ successfully, or <code>false</code> otherwise.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>
-<span class="hljs-keyword">var</span> remove = <span class="hljs-built_in">module</span>.exports.remove = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">remove</span><span class="hljs-params">(object, path, value)</span> </span>{
-  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
-    path = path.split(<span class="hljs-string">"."</span>);
-  }
+<span class="hljs-keyword">var</span> remove = <span class="hljs-built_in">module</span>.exports.remove = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">remove</span><span class="hljs-params">(object, path)</span> </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">arguments</span>.length === <span class="hljs-number">2</span>) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> path === <span class="hljs-string">"string"</span>) {
+      path = path.split(<span class="hljs-string">"."</span>);
+    }
 
-  <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">if</span> (!(path <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) || path.length === <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">return</span>;
+    }
+    path = path.slice();
+
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">var</span> acc = [];
+    <span class="hljs-built_in">Array</span>.prototype.slice.call(<span class="hljs-built_in">arguments</span>, <span class="hljs-number">1</span>).forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(item)</span> </span>{
+      <span class="hljs-keyword">if</span> (item <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Array</span>) {
+        acc = [].concat(acc, item);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> item === <span class="hljs-string">"string"</span> &amp;&amp; item.indexOf(<span class="hljs-string">"."</span>) !== -<span class="hljs-number">1</span>) {
+        acc = [].concat(acc, item.split(<span class="hljs-string">"."</span>));
+      } <span class="hljs-keyword">else</span> {
+        acc.push(item);
+      }
+    });
+    path = acc;
   }
-  
-  path = path.slice();
 
   <span class="hljs-keyword">var</span> key = path.shift();
 
@@ -262,23 +347,21 @@ successfully, or <code>false</code> otherwise.</p>
     <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Object</span>.hasOwnProperty.call(object, key)) {
       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     }
-
     <span class="hljs-keyword">delete</span> object[key];
-
     <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
   } <span class="hljs-keyword">else</span> {
-    <span class="hljs-keyword">return</span> remove(object[key], path, value);
+    <span class="hljs-keyword">return</span> remove(object[key], path);
   }
 };</pre></div></div>
             
         </li>
         
         
-        <li id="section-7">
+        <li id="section-8">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-7">&#182;</a>
+                <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
               <p><code>deepKeys</code> creates a list of all possible key paths for a given object.</p>
 <p>The return value is always an array, the members of which are paths in array

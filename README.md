@@ -72,7 +72,8 @@ console.log(object);
 
 Binding and Currying
 ----
-- Note please read below for the one Caveat of this new feature, which affects put.
+Note please read below for the one Caveat of this new feature, which affects put.
+
 ```javascript
 var obj = 
 {
