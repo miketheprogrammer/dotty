@@ -1,4 +1,4 @@
-(MAINTAINED Version)
+(MAINTAINED Version) (Works on 0.6 - 0.11) Previous version not tested but should work
 * note: After Dotty fell into the hole of forgotten projects, I have uploaded this module. I will work to get the current pull requests merged into my branch as well as improve any existing functionality as best I can without breaking backwards compatibility with Dotty.
 
 Dotty (Maintained as "dotty-bindable" on NPM) [![build status](https://secure.travis-ci.org/miketheprogrammer/dotty.png)](http://travis-ci.org/miketheprogrammer/dotty)
