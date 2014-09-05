@@ -151,6 +151,5 @@ License
 Contact
 -------
 
-* GitHub ([http://github.com/deoxxa](deoxxa))
-* Twitter ([http://twitter.com/deoxxa](@deoxxa))
-* Email ([mailto:deoxxa@fknsrs.biz](deoxxa@fknsrs.biz))
+* GitHub ([http://github.com/miketheprogrammer](miketheprogrammer))
+* Email ([mailto:michael.hernandez1988@gmail.com](michael.hernandez1988@gmail.com))
